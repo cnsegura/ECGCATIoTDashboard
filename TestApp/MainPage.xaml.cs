@@ -31,7 +31,7 @@ namespace TestApp
         private void button_Click(object sender, RoutedEventArgs e)
         {
             var createConsumer = new KafkaConsumerMgr();
-            var myResponse = createConsumer.CreateConsumer("sensor_instance", false);
+            var myResponse = createConsumer.CreateConsumer("sensor_instance", "smallest");
         }
     }
 }

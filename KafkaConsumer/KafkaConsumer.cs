@@ -10,7 +10,7 @@ namespace KafkaConsumer
 {
     public class KafkaConsumerMgr
     {
-        public async Task<HttpResponseMessage> CreateConsumer(string _instanceName, bool _fromBeginning) 
+        public async Task<HttpResponseMessage> CreateConsumer(string _instanceName, string _offsetPosition) 
         {
             //string topicString = "/SensorData";
             //UriBuilder u1 = new UriBuilder();
@@ -23,8 +23,8 @@ namespace KafkaConsumer
             string topicUri = "http://wssccatiot.westus.cloudapp.azure.com:8082/consumers/json_consumer";
             //Currently focused on REST API surface for Confluent.io Kafka deployment. We can make this more generic in the future
             string jsonHeader = ("{\"name\": "); //same as above, fixing string for Server requirements
-            string jsonBody = "\"" + _instanceName + "\", \"format\": \"json\", "; 
-            string jsonFooter = ("}]}"); //ditto
+            string jsonBody = "\"" + _instanceName + "\", \"format\": \"json\", ";
+            string jsonFooter = ("\"auto.offset.reset\": \"") + _offsetPosition + "\"}";
             string json = jsonHeader + jsonBody + jsonFooter;
 
             var baseFilter = new HttpClientHandler();
