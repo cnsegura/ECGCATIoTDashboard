@@ -10,7 +10,7 @@ namespace KafkaConsumer
 {
     public class KafkaConsumerMgr
     {
-        public async Task<HttpResponseMessage> CreateConsumer(string _instanceName, bool _fromBeginning)
+        public async Task<HttpResponseMessage> CreateConsumer(string _instanceName, bool _fromBeginning) 
         {
             //string topicString = "/SensorData";
             //UriBuilder u1 = new UriBuilder();
