@@ -4,6 +4,7 @@ using System.IO;
 using System.Linq;
 using System.Net.Http;
 using System.Runtime.InteropServices.WindowsRuntime;
+using Newtonsoft.Json;
 using KafkaConsumer;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
@@ -14,6 +15,7 @@ using Windows.UI.Xaml.Data;
 using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
+
 
 // The Blank Page item template is documented at http://go.microsoft.com/fwlink/?LinkId=402352&clcid=0x409
 
@@ -29,11 +31,12 @@ namespace TestApp
             this.InitializeComponent();
         }
 
-        private void button_Click(object sender, RoutedEventArgs e)
+        private async void button_Click(object sender, RoutedEventArgs e)
         {
             var kafkaConsumer = new KafkaConsumerMgr();
-            var myResponse = kafkaConsumer.CreateConsumer("sensor_instance", "smallest");
+            string myResponse = await kafkaConsumer.CreateConsumerAsync("sensor_instance", "smallest"); //creating instance name "sensor_instance" and setitng the kafka auto index to the earliest time
             string readMe = myResponse.ToString();
+            Status.Text += myResponse + "\n";
             //if (myResponse != null)
             //{
             //    string jsonData = kafkaConsumer.GetConsumerData(Id)

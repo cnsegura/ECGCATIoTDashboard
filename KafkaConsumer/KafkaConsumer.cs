@@ -10,7 +10,7 @@ namespace KafkaConsumer
 {
     public class KafkaConsumerMgr
     {
-        public async Task<HttpResponseMessage> CreateConsumer(string _instanceName, string _offsetPosition) 
+        public async Task<string> CreateConsumerAsync(string _instanceName, string _offsetPosition) 
         {
             string topicUri = "http://wssccatiot.westus.cloudapp.azure.com:8082/consumers/json_consumer";
             //Currently focused on REST API surface for Confluent.io Kafka deployment. We can make this more generic in the future
@@ -27,7 +27,15 @@ namespace KafkaConsumer
             postBody.Headers.ContentType = new MediaTypeHeaderValue("application/vnd.kafka.json.v1+json"); //set Content-Type header
             HttpResponseMessage postResponse = await httpClient.PostAsync(topicUri,postBody);
 
-            return postResponse;            
+            if (postResponse.IsSuccessStatusCode == false)
+            {
+                
+                return postResponse.StatusCode.ToString(); 
+            }
+            else
+            {
+                return postResponse.Content.ToString();
+            }
         }
         public async Task<string> GetConsumerData(string _instanceId, string _baseUri)
         {
