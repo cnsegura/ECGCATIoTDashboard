@@ -10,7 +10,7 @@ namespace KafkaConsumer
 {
     public class KafkaConsumerMgr
     {
-        public async Task<string> CreateConsumerAsync(string _instanceName, string _offsetPosition) 
+        public async Task<HttpResponseMessage> CreateConsumerAsync(string _instanceName, string _offsetPosition) 
         {
             string topicUri = "http://wssccatiot.westus.cloudapp.azure.com:8082/consumers/json_consumer";
             //Currently focused on REST API surface for Confluent.io Kafka deployment. We can make this more generic in the future
@@ -27,26 +27,18 @@ namespace KafkaConsumer
             postBody.Headers.ContentType = new MediaTypeHeaderValue("application/vnd.kafka.json.v1+json"); //set Content-Type header
             HttpResponseMessage postResponse = await httpClient.PostAsync(topicUri,postBody);
 
-            if (postResponse.IsSuccessStatusCode == false)
-            {
-                
-                return postResponse.StatusCode.ToString(); 
-            }
-            else
-            {
-                return postResponse.Content.ToString();
-            }
+            return postResponse; 
         }
-        public async Task<string> GetConsumerData(string _instanceId, string _baseUri)
+        public async Task<HttpResponseMessage> GetConsumerDataAsync(string _instanceId, string _baseUri)
         {
+            
             var baseFilter = new HttpClientHandler();
             baseFilter.AutomaticDecompression = System.Net.DecompressionMethods.None; //turn off all compression methods
             HttpClient httpClient = new HttpClient(baseFilter);
             httpClient.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/vnd.kafka.json.v1+json")); //Add Accept: application/vnd.kafka.json.vl+json, application... header )
             HttpResponseMessage postResponse = await httpClient.GetAsync(_baseUri);
-            string postResponseString = postResponse.Content.ToString();
 
-            return postResponseString;
+            return postResponse;
         }
 
 

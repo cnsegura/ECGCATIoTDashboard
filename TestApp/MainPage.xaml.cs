@@ -34,13 +34,23 @@ namespace TestApp
         private async void button_Click(object sender, RoutedEventArgs e)
         {
             var kafkaConsumer = new KafkaConsumerMgr();
-            string myResponse = await kafkaConsumer.CreateConsumerAsync("sensor_instance", "smallest"); //creating instance name "sensor_instance" and setitng the kafka auto index to the earliest time
-            string readMe = myResponse.ToString();
-            Status.Text += myResponse + "\n";
-            //if (myResponse != null)
-            //{
-            //    string jsonData = kafkaConsumer.GetConsumerData(Id)
-            //}
+            HttpResponseMessage myResponse = await kafkaConsumer.CreateConsumerAsync("sensor_instance", "smallest"); //creating instance name "sensor_instance" and setitng the kafka auto index to the earliest time
+
+            if (myResponse.IsSuccessStatusCode == false)
+            {
+                string readMe = myResponse.StatusCode.ToString();
+                Status.Text += myResponse + "\n";
+            }
+            else
+            {
+                string deserializeContent = await myResponse.Content.ReadAsStringAsync(); //get instance_id and base_uri info from HTTP content
+                KafkaRestData kafkaRestData = JsonConvert.DeserializeObject<KafkaRestData>(deserializeContent); //convert to Json
+                kafkaRestData.base_uri += "/topcs/SensorData"; // need to make this generic in the future, will pass into the method from webpage
+                myResponse = await kafkaConsumer.GetConsumerDataAsync(kafkaRestData.instance_id, kafkaRestData.base_uri);
+                deserializeContent = await myResponse.Content.ReadAsStringAsync(); //get Json string back from Kafka
+                Status.Text += deserializeContent + "\n";
+            }
+
         }
     }
 }
