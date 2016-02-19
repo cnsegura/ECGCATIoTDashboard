@@ -41,6 +41,18 @@ namespace KafkaConsumer
             return postResponse;
         }
 
+        public async Task<HttpResponseMessage> DeleteConsumerAsync(string _baseUri)
+        {
+
+            //var baseFilter = new HttpClientHandler();
+            //baseFilter.AutomaticDecompression = System.Net.DecompressionMethods.None; //turn off all compression methods
+            //HttpClient httpClient = new HttpClient(baseFilter);
+            HttpClient httpClient = new HttpClient();
+            //httpClient.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/vnd.kafka.json.v1+json")); //Add Accept: application/vnd.kafka.json.vl+json, application... header )
+            HttpResponseMessage postResponse = await httpClient.DeleteAsync(_baseUri);
+
+            return postResponse;
+        }
 
 
     }
