@@ -12,14 +12,6 @@ namespace KafkaConsumer
     {
         public async Task<HttpResponseMessage> CreateConsumer(string _instanceName, string _offsetPosition) 
         {
-            //string topicString = "/SensorData";
-            //UriBuilder u1 = new UriBuilder();
-            ////u1.Host = "localhost"; //DEBUG
-            //u1.Host = "wssccatiot.westus.cloudapp.azure.com";
-            //u1.Port = 8082;
-            //u1.Path = "topics" + topicString;
-            //u1.Scheme = "http";
-            //Uri topicUri = u1.Uri;
             string topicUri = "http://wssccatiot.westus.cloudapp.azure.com:8082/consumers/json_consumer";
             //Currently focused on REST API surface for Confluent.io Kafka deployment. We can make this more generic in the future
             string jsonHeader = ("{\"name\": "); //same as above, fixing string for Server requirements
@@ -34,8 +26,22 @@ namespace KafkaConsumer
             HttpContent postBody = new StringContent(json);
             postBody.Headers.ContentType = new MediaTypeHeaderValue("application/vnd.kafka.json.v1+json"); //set Content-Type header
             HttpResponseMessage postResponse = await httpClient.PostAsync(topicUri,postBody);
-            return postResponse;
+
+            return postResponse;            
         }
+        public async Task<string> GetConsumerData(string _instanceId, string _baseUri)
+        {
+            var baseFilter = new HttpClientHandler();
+            baseFilter.AutomaticDecompression = System.Net.DecompressionMethods.None; //turn off all compression methods
+            HttpClient httpClient = new HttpClient(baseFilter);
+            httpClient.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/vnd.kafka.json.v1+json")); //Add Accept: application/vnd.kafka.json.vl+json, application... header )
+            HttpResponseMessage postResponse = await httpClient.GetAsync(_baseUri);
+            string postResponseString = postResponse.Content.ToString();
+
+            return postResponseString;
+        }
+
+
 
     }
 }

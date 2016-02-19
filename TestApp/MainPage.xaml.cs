@@ -30,8 +30,13 @@ namespace TestApp
 
         private void button_Click(object sender, RoutedEventArgs e)
         {
-            var createConsumer = new KafkaConsumerMgr();
-            var myResponse = createConsumer.CreateConsumer("sensor_instance", "smallest");
+            var kafkaConsumer = new KafkaConsumerMgr();
+            var myResponse = kafkaConsumer.CreateConsumer("sensor_instance", "smallest");
+            string readMe = myResponse.ToString();
+            //if (myResponse != null)
+            //{
+            //    string jsonData = kafkaConsumer.GetConsumerData(Id)
+            //}
         }
     }
 }
