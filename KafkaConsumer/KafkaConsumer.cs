@@ -10,7 +10,7 @@ namespace KafkaConsumer
 {
     public class KafkaConsumerMgr
     {
-        public async Task<HttpResponseMessage> CreateConsumerAsync(string _instanceName, string _offsetPosition) 
+        public async Task<HttpResponseMessage> PostCreateConsumerAsync(string _instanceName, string _offsetPosition) 
         {
             string topicUri = "http://wssccatiot.westus.cloudapp.azure.com:8082/consumers/json_consumer";
             //Currently focused on REST API surface for Confluent.io Kafka deployment. We can make this more generic in the future

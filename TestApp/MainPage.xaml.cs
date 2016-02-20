@@ -34,7 +34,7 @@ namespace TestApp
         private async void button_Click(object sender, RoutedEventArgs e)
         {
             var kafkaConsumer = new KafkaConsumerMgr();
-            HttpResponseMessage myResponse = await kafkaConsumer.CreateConsumerAsync("sensor_instance", "smallest"); //creating instance name "sensor_instance" and setitng the kafka auto index to the earliest time
+            HttpResponseMessage myResponse = await kafkaConsumer.PostCreateConsumerAsync("sensor_instance", "smallest"); //creating instance name "sensor_instance" and setitng the kafka auto index to the earliest time
 
             if (myResponse.IsSuccessStatusCode == false)
             {
@@ -46,6 +46,7 @@ namespace TestApp
                 string deserializeContent = await myResponse.Content.ReadAsStringAsync(); //get instance_id and base_uri info from HTTP content
                 KafkaRestData kafkaRestData = JsonConvert.DeserializeObject<KafkaRestData>(deserializeContent); //convert to Json
                 string topicPath = "/topcs/SensorData"; // need to make this generic in the future, will pass into the method from webpage
+
                 myResponse = await kafkaConsumer.GetConsumerDataAsync(kafkaRestData.instance_id, kafkaRestData.base_uri + topicPath);
                 deserializeContent = await myResponse.Content.ReadAsStringAsync(); //get Json string back from Kafka
                 Status.Text += deserializeContent + "\n";
