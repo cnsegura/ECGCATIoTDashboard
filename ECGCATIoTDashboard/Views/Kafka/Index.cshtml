@@ -1,9 +1,10 @@
 ﻿@{
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-@{ 
-    ViewBag.Title = "Kafka View";
-}
+
+<script src="~/Scripts/jquery-1.10.2.min.js"></script>
+<script src="~/Scripts/jquery.unobtrusive-ajax.min.js"></script>
+
 <h2>Index</h2>
 
 <table border=1 width=500 cellpadding=10>
@@ -15,17 +16,23 @@
     </tr>
     <tr>
         <td>
-            <p><input type="button" id="initConsumer" value="Start Consumer" /></p>
+            <p>
+                @Ajax.ActionLink("Start Consumer","InitConsumer", new AjaxOptions()
+                                                                    {
+                                                                        HttpMethod = "GET",
+                                                                        UpdateTargetId = "logArea",
+                                                                        InsertionMode = InsertionMode.InsertAfter
+                                                                    })
+
+            </p>
         </td>
         <td>
             <p><input type="button" id="stopConsumer" value="Stop Consumer" /></p>
         </td>
     </tr>
     <tr>
-        <td colspan=2 >
-            <div id="logArea">
-                <p>I'm text in a div.</p>
-            </div>
+        <td colspan=2 id="logArea" >
+
         </td>
     </tr>
 </table>

@@ -15,10 +15,10 @@ namespace ECGCATIoTDashboard.Controllers
             return View();
         }
 
-        public ActionResult InitConsumer()
+        public PartialViewResult InitConsumer()
         {
             string time = DateTime.UtcNow.ToString();
-            return View(time); 
+            return PartialView("_KafkaData", time);
 
 
         }
