@@ -14,5 +14,13 @@ namespace ECGCATIoTDashboard.Controllers
             
             return View();
         }
+
+        public ActionResult InitConsumer()
+        {
+            string time = DateTime.UtcNow.ToString();
+            return View(time); 
+
+
+        }
     }
 }

@@ -2,11 +2,11 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 @{ 
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Kafka View";
 }
 <h2>Index</h2>
 
-<table border=1 width="75%" cellpadding=10>
+<table border=1 width=500 cellpadding=10>
     <tr>
         <td colspan="2">
             <p>View sensor data as it is stored within Kafka. Note the offset, topic and partition information... More insight here... </p>
@@ -15,15 +15,15 @@
     </tr>
     <tr>
         <td>
-            <p>I'm text in a cell.</p>
+            <p><input type="button" id="initConsumer" value="Start Consumer" /></p>
         </td>
         <td>
-            <p>I'm text in a cell.</p>
+            <p><input type="button" id="stopConsumer" value="Stop Consumer" /></p>
         </td>
     </tr>
     <tr>
-        <td colspan=2 id="logArea">
-            <div id="my_box">
+        <td colspan=2 >
+            <div id="logArea">
                 <p>I'm text in a div.</p>
             </div>
         </td>
