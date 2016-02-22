@@ -6,14 +6,22 @@
 <script src="~/Scripts/jquery.unobtrusive-ajax.min.js"></script>
 <script type="text/javascript">
     //auto refresh kafka consumer script
+    var timer;
     $(document).ready(function () {
-        WireEvents();
+        InitConsumer();
     });
-    function WireEvents() {
-        setInterval("$('#logArea').load('/Kafka/InitConsumer')", 3000);
+    function InitConsumer() {
+        $("#initconsumer").on("click", function () { timer = setInterval("$('#logArea').load('/Kafka/InitConsumer')", 3000); });
     }
 
+    $(document).ready(function () {
+        DeleteConsumer();
+    });
+    function DeleteConsumer() {
+        $("#deleteconsumer").on("click", function () { clearInterval(timer); });
+    }
 </script>
+
 
 <h2>Index</h2>
 
@@ -26,18 +34,10 @@
     </tr>
     <tr>
         <td>
-            <p>
-                @Ajax.ActionLink("Start Consumer","InitConsumer", new AjaxOptions()
-                                                                    {
-                                                                        HttpMethod = "GET",
-                                                                        UpdateTargetId = "logArea",
-                                                                        InsertionMode = InsertionMode.InsertAfter
-                                                                    })
-
-            </p>
+            <p><input type="button" id="initconsumer" name="initconsumer" value="Start Consumer" /></p>
         </td>
         <td>
-            <p><input type="button" id="submit" name="submit" value="submit"  /></p>
+            <p><input type="button" id="deleteconsumer" name="deleteconsumer" value="Stop Consumer" /></p>
         </td>
     </tr>
     <tr>
