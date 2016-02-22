@@ -18,7 +18,8 @@ namespace ECGCATIoTDashboard.Controllers
         public PartialViewResult InitConsumer()
         {
             string time = DateTime.UtcNow.ToString();
-            return PartialView("_KafkaData", time);
+            TempData["time"] = time;
+            return PartialView("_KafkaData");
 
 
         }
