@@ -10,9 +10,11 @@
         WireEvents();
     });
     function WireEvents() {
-        $.get('/Kafka/InitConsumer', function (data) {
-            $('logArea').html(data);
-            setTimeout(WireEvents, 3000);
+        $("#submit").click(function UpdateDiv () {
+            $.get('/Kafka/InitConsumer', function (data) {
+                $('logArea').html(data);
+                setTimeout(UpdateDiv, 3000);
+            });
         });
     }
 
@@ -49,6 +51,9 @@
         </td>
     </tr>
 </table>
+<div id="testLog">
+    <p>I'm here</p>
+</div>
 
 
 
