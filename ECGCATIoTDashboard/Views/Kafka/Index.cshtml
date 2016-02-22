@@ -4,20 +4,18 @@
 
 <script src="~/Scripts/jquery-1.10.2.min.js"></script>
 <script src="~/Scripts/jquery.unobtrusive-ajax.min.js"></script>
-<script>
+<script type="text/javascript">
     //auto refresh kafka consumer script
-    $("#submit").click(function worker() {
-        $.ajax({
-            url: 'kafka/InitConsumer',
-            success: function (data) {
-
-            },
-            complete: function () {
-                //schedule next request when the current one is complete
-                setTimeout(worker, 3000);
-            }
+    $(document).ready(function () {
+        WireEvents();
+    });
+    function WireEvents() {
+        $.get('/Kafka/InitConsumer', function (data) {
+            $('logArea').html(data);
+            setTimeout(WireEvents, 3000);
         });
-    })();
+    }
+
 </script>
 
 <h2>Index</h2>
@@ -42,7 +40,7 @@
             </p>
         </td>
         <td>
-            <p><input type="button" id="submit" name="submit" value="Start Consumer" /></p>
+            <p><input type="button" id="submit" name="submit" value="submit"  /></p>
         </td>
     </tr>
     <tr>
