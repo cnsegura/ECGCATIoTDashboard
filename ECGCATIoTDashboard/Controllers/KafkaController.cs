@@ -15,6 +15,7 @@ namespace ECGCATIoTDashboard.Controllers
             return View();
         }
 
+        [OutputCache(NoStore =true, Location =System.Web.UI.OutputCacheLocation.Client, Duration =3)]
         public PartialViewResult InitConsumer()
         {
             string time = DateTime.UtcNow.ToString();
