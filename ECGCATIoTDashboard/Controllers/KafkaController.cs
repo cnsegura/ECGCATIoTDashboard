@@ -23,6 +23,7 @@ namespace ECGCATIoTDashboard.Controllers
         public async Task<PartialViewResult> InitConsumer()
         {
             string storedInstance_id = (string)System.Web.HttpContext.Current.Application["instance_id"];
+
             if (storedInstance_id == null) //need to create an instance on the Kafka server and store the id and url
             {
                 var kafkaConsumer = new KafkaConsumerMgr();
@@ -31,7 +32,10 @@ namespace ECGCATIoTDashboard.Controllers
                 if (myResponse.IsSuccessStatusCode == false)
                 {
                     string readMe = myResponse.StatusCode.ToString();
-                    //Status.Text += myResponse + "\n";
+
+                    //data error return error to screen
+                    TempData["time"] = readMe;
+                    return PartialView("_KafkaData");
                 }
                 else
                 {
@@ -43,7 +47,10 @@ namespace ECGCATIoTDashboard.Controllers
 
                     myResponse = await kafkaConsumer.GetConsumerDataAsync(kafkaRestData.instance_id, kafkaRestData.base_uri + topicPath);
                     deserializeContent = await myResponse.Content.ReadAsStringAsync(); //get Json string back from Kafka
-                    //Status.Text += deserializeContent + "\n";
+
+                    //return data to screen
+                    TempData["time"] = deserializeContent;
+                    return PartialView("_KafkaData");
 
                 }
             }
@@ -55,11 +62,15 @@ namespace ECGCATIoTDashboard.Controllers
 
                 HttpResponseMessage myResponse = await kafkaConsumer.GetConsumerDataAsync(storedInstance_id, storedBase_Uri + topicPath);
                 string deserializeContent = await myResponse.Content.ReadAsStringAsync(); //get Json string back from Kafka
+
+                //return data to screen
+                TempData["time"] = deserializeContent;
+                return PartialView("_KafkaData");
             }
 
-            string time = DateTime.UtcNow.ToString();
-            TempData["time"] = time;
-            return PartialView("_KafkaData");
+            //string time = DateTime.UtcNow.ToString();
+            //TempData["time"] = time;
+            //return PartialView("_KafkaData");
 
 
         }
