@@ -18,7 +18,13 @@
         DeleteConsumer();
     });
     function DeleteConsumer() {
-        $("#deleteconsumer").on("click", function () { clearInterval(timer); });
+        $("#deleteconsumer").on("click", function () {
+            clearInterval(timer);
+            $.ajax({
+                url: '/Kafka/DeleteConsumer'
+            });
+        });
+
     }
 </script>
 

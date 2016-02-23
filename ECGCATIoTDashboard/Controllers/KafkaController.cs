@@ -34,7 +34,7 @@ namespace ECGCATIoTDashboard.Controllers
                     string readMe = myResponse.StatusCode.ToString();
 
                     //data error return error to screen
-                    TempData["time"] = readMe;
+                    TempData["data"] = readMe;
                     return PartialView("_KafkaData");
                 }
                 else
@@ -43,13 +43,13 @@ namespace ECGCATIoTDashboard.Controllers
                     KafkaRestData kafkaRestData = JsonConvert.DeserializeObject<KafkaRestData>(deserializeContent); //convert to Json and put into objects kafkarestdata.instance_id etc.
                     System.Web.HttpContext.Current.Application["instance_id"] = kafkaRestData.instance_id; //store instance_id
                     System.Web.HttpContext.Current.Application["base_uri"] = kafkaRestData.base_uri; //store base_uri
-                    string topicPath = "/topcs/SensorData"; // need to make this generic in the future
+                    string topicPath = "/topics/SensorData"; // need to make this generic in the future
 
                     myResponse = await kafkaConsumer.GetConsumerDataAsync(kafkaRestData.instance_id, kafkaRestData.base_uri + topicPath);
                     deserializeContent = await myResponse.Content.ReadAsStringAsync(); //get Json string back from Kafka
 
                     //return data to screen
-                    TempData["time"] = deserializeContent;
+                    TempData["data"] = deserializeContent;
                     return PartialView("_KafkaData");
 
                 }
@@ -58,21 +58,27 @@ namespace ECGCATIoTDashboard.Controllers
             {
                 var kafkaConsumer = new KafkaConsumerMgr();
                 string storedBase_Uri = (string)System.Web.HttpContext.Current.Application["base_uri"]; //we alrady have instance_id from the top 
-                string topicPath = "/topcs/SensorData"; // need to make this generic in the future
+                string topicPath = "/topics/SensorData"; // need to make this generic in the future
 
                 HttpResponseMessage myResponse = await kafkaConsumer.GetConsumerDataAsync(storedInstance_id, storedBase_Uri + topicPath);
                 string deserializeContent = await myResponse.Content.ReadAsStringAsync(); //get Json string back from Kafka
 
                 //return data to screen
-                TempData["time"] = deserializeContent;
+                TempData["data"] = deserializeContent;
                 return PartialView("_KafkaData");
             }
+        }
+    
+        public async Task<PartialViewResult> DeleteConsumer()
+        {
+            var kafkaConsumer = new KafkaConsumerMgr();
+            string storedBase_Uri = (string)System.Web.HttpContext.Current.Application["base_uri"];
+            HttpResponseMessage myResponse = await kafkaConsumer.DeleteConsumerAsync(storedBase_Uri);
+            string readMe = myResponse.StatusCode.ToString();
 
-            //string time = DateTime.UtcNow.ToString();
-            //TempData["time"] = time;
-            //return PartialView("_KafkaData");
-
-
+            //return status code to screen
+            TempData["data"] = readMe;
+            return PartialView("_KafkaData");
         }
     }
 }
