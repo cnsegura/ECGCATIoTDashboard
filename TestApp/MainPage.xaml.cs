@@ -44,7 +44,7 @@ namespace TestApp
             else
             {
                 string deserializeContent = await myResponse.Content.ReadAsStringAsync(); //get instance_id and base_uri info from HTTP content
-                KafkaRestData kafkaRestData = JsonConvert.DeserializeObject<KafkaRestData>(deserializeContent); //convert to Json
+                KafkaRestData kafkaRestData = JsonConvert.DeserializeObject<KafkaRestData>(deserializeContent); //convert to Json and put into objects kafkarestdata.instance_id etc.
                 string topicPath = "/topcs/SensorData"; // need to make this generic in the future, will pass into the method from webpage
 
                 myResponse = await kafkaConsumer.GetConsumerDataAsync(kafkaRestData.instance_id, kafkaRestData.base_uri + topicPath);
