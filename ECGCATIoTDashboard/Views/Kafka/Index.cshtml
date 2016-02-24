@@ -28,31 +28,67 @@
     }
 </script>
 
+<body>
+    <!-- Fixed navbar -->
+    <nav class="navbar navbar-inverse navbar-fixed-top">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="#">ECG IoT</a>
+            </div>
+            <div id="navbar" class="navbar-collapse collapse">
+                <ul class="nav navbar-nav">
+                    <li class="active"><a href="#">Home</a></li>
+                    <li><a href="#about">About</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Dashboards <span class="caret"></span></a>
+                        <ul class="dropdown-menu">
+                            <li><a href="/kafka/index">Kafka Dashboard</a></li>
+                            <li><a href="#">Storm Dashboard</a></li>
+                            <li><a href="#">ML Dashboard</a></li>
+                            <li role="separator" class="divider"></li>
+                            <li class="dropdown-header">Scenarios</li>
+                            <li><a href="#">BI</a></li>
+                            <li><a href="#">Digital Signage Backend</a></li>
+                        </ul>
+                    </li>
+                </ul>
+                <ul class="nav navbar-nav navbar-right">
+                    <li><a href="../navbar/">Default</a></li>
+                    <li><a href="../navbar-static-top/">Static top</a></li>
+                    <li class="active"><a href="./">Fixed top <span class="sr-only">(current)</span></a></li>
+                </ul>
+            </div><!--/.nav-collapse -->
+        </div>
+    </nav>
+    
 
-<h2>Index</h2>
+    <table border=1 width=500 cellpadding=10>
+        <tr>
+            <td colspan="2">
+                <p>View sensor data as it is stored within Kafka. Note the offset, topic and partition information... More insight here... </p>
+            </td>
 
-<table border=1 width=500 cellpadding=10>
-    <tr>
-        <td colspan="2">
-            <p>View sensor data as it is stored within Kafka. Note the offset, topic and partition information... More insight here... </p>
-        </td>
-
-    </tr>
-    <tr>
-        <td>
-            <p><input type="button" id="initconsumer" name="initconsumer" value="Start Consumer" /></p>
-        </td>
-        <td>
-            <p><input type="button" id="deleteconsumer" name="deleteconsumer" value="Stop Consumer" /></p>
-        </td>
-    </tr>
-    <tr>
-        <td colspan=2 id="logArea" >
-
-        </td>
-    </tr>
-</table>
-
+        </tr>
+        <tr>
+            <td>
+                <p><input type="button" id="initconsumer" name="initconsumer" value="Start Consumer" /></p>
+            </td>
+            <td>
+                <p><input type="button" id="deleteconsumer" name="deleteconsumer" value="Stop Consumer" /></p>
+            </td>
+        </tr>
+        <tr>
+            <td colspan=2 id="logArea"></td>
+        </tr>
+    </table>
+</body>
 
 
 
