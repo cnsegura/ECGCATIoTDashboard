@@ -67,27 +67,28 @@
             </div><!--/.nav-collapse -->
         </div>
     </nav>
-    
+    <div class="container">
 
-    <table border=1 width=500 cellpadding=10>
-        <tr>
-            <td colspan="2">
-                <p>View sensor data as it is stored within Kafka. Note the offset, topic and partition information... More insight here... </p>
-            </td>
+        <table class="table">
+            <tr>
+                <td colspan="2">
+                    <p>View sensor data as it is stored within Kafka. Note the offset, topic and partition information... More insight here... </p>
+                </td>
 
-        </tr>
-        <tr>
-            <td>
-                <p><input type="button" id="initconsumer" name="initconsumer" value="Start Consumer" /></p>
-            </td>
-            <td>
-                <p><input type="button" id="deleteconsumer" name="deleteconsumer" value="Stop Consumer" /></p>
-            </td>
-        </tr>
-        <tr>
-            <td colspan=2 id="logArea"></td>
-        </tr>
-    </table>
+            </tr>
+            <tr>
+                <td>
+                    <p><input type="button" id="initconsumer" name="initconsumer" value="Start Consumer" /></p>
+                </td>
+                <td>
+                    <p><input type="button" id="deleteconsumer" name="deleteconsumer" value="Stop Consumer" /></p>
+                </td>
+            </tr>
+            <tr>
+                <td colspan=2 id="logArea"></td>
+            </tr>
+        </table>
+    </div> <!--Container--> 
 </body>
 
 
