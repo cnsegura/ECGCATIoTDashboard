@@ -48,7 +48,7 @@
             <div id="navbar" class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
                     <li class="active"><a href="#">Home</a></li>
-                    <li><a href="#about">About</a></li>
+                    <li><a href="/home/About">About</a></li>
                     <li><a href="#contact">Contact</a></li>
                     <li class="dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Dashboards <span class="caret"></span></a>
@@ -76,14 +76,18 @@
     <div class="container">
 
         <!-- Main component for a primary marketing message or call to action -->
-        <div class="jumbotron">
+        <div class="container-fluid">
             <h1>IoT Hub Home</h1>
-            <p>This is the home page for the ECG IoT Hub. The hub connects to various components within the end-to-end IoT demo utilizing our ECG vending machine. </p>
-            <p>More detail here, more pictures explaining the demo etc. </p>
-            <img class="img-responsive" src="~/Content/Images/DemoArchitecture.png" width="708" height="346"/>
-            <p>
-                <a class="btn btn-info" href="../../components/#navbar" role="button">Learn more &raquo;</a>
+            <p>This is the home page for the ECG IoT Hub. The hub provides access, and information regarding the various components within the end-to-end ECG IoT demo.
+            Our reference architecture, depcited below, allows us to demonstrate many aspects of a typical IoT scenario. </p>
+            <p>Our architecture starts with a device (a "vending machine")
+            which generates many diffent pieces of data about its environment. From the current state of internal components (temperature), to device usage, our vending machine can provide
+            the enterprise with a weatlth of data which can help inform a business and run more efficiently. 
             </p>
+            <p>For more technical data on the overall architecture, please visit the "about" page. For more information on each of the key components depicted in the architecture please visit
+            the dashboards section. 
+            </p>
+            <img class="img-responsive" src="~/Content/Images/DemoArchitecture.png" width="708" height="346"/>
         </div>
 
     </div> <!-- /container -->
