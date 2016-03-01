@@ -26,5 +26,11 @@ namespace ECGCATIoTDashboard.Controllers
 
             return View();
         }
+        public ActionResult Client()
+        {
+            ViewBag.Message = "Client page";
+
+            return View();
+        }
     }
 }
