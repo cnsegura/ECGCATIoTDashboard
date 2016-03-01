@@ -3,7 +3,7 @@
   <Role name="ECGCATIoTDashboard">
     <Instances count="1" />
     <ConfigurationSettings>
-      <Setting name="Microsoft.WindowsAzure.Plugins.Diagnostics.ConnectionString" value="UseDevelopmentStorage=true" />
+      <Setting name="Microsoft.WindowsAzure.Plugins.Diagnostics.ConnectionString" value="DefaultEndpointsProtocol=https;AccountName=ecgcatiot;AccountKey=lLTMcysEDWavGo7BzGVNVETBfghwyF4KNj5HZNvqjBI92fNqNkXHt6P81t6X+R0gOEnrp0TA9XsGm2tpP/iGYQ==" />
     </ConfigurationSettings>
   </Role>
 </ServiceConfiguration>
