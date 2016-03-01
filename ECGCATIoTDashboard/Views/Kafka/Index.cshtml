@@ -68,14 +68,8 @@
         </div>
     </nav>
     <div class="container">
-
+        <p>View sensor data as it is stored within Kafka. Note the offset, topic and partition information... More insight here... </p>
         <table class="table">
-            <tr>
-                <td colspan="2">
-                    <p>View sensor data as it is stored within Kafka. Note the offset, topic and partition information... More insight here... </p>
-                </td>
-
-            </tr>
             <tr>
                 <td>
                     <p><input type="button" class="btn btn-default" id="initconsumer" name="initconsumer" value="Start Consumer" /></p>
@@ -88,7 +82,19 @@
                 <td colspan=2 id="logArea"></td>
             </tr>
         </table>
-    </div> <!--Container--> 
+        <div class="row">
+            <div class="col-lg-10">
+                <a href="#">
+                    <img class="img-responsive" src="~/Content/Images/Consumer.png" alt="">
+                </a>
+                <h3>
+                    <a href="#">Producer/Kafka/Consumer</a>
+                </h3>
+                <p>This webpage creates a consumer instance with the Kafka broker in Azure once you press "Start Consumer"</p>
+            </div>
+        </div><!--Row-->
+
+   </div> <!--Container--> 
 </body>
 
 
